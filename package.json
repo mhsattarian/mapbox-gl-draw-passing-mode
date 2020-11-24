@@ -1,0 +1,37 @@
+{
+  "name": "mapbox-gl-draw-passing-mode",
+  "version": "0.0.0",
+  "description": "passing drawing mode for mapbox-gl-draw",
+  "main": "dist/mapbox-gl-draw-passing-mode.js",
+  "module": "index.js",
+  "scripts": {
+    "build": "rollup --config rollup.config.js"
+  },
+  "devDependencies": {
+    "@mapbox/mapbox-gl-draw": "^1.2.0",
+    "@rollup/plugin-node-resolve": "^10.0.0",
+    "rollup": "^2.33.3"
+  },
+  "peerDependencies": {
+    "@mapbox/mapbox-gl-draw": "^1.2.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/mhsattarian/mapbox-gl-draw-passing-mode.git"
+  },
+  "keywords": [
+    "mapbox",
+    "mapbox-gl",
+    "mapbox-gl-draw",
+    "draw",
+    "mode",
+    "passing",
+    "temporary"
+  ],
+  "author": "Mohammad H. Sattarian (mh_sattarian@outlook.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mhsattarian/mapbox-gl-draw-passing-mode/issues"
+  },
+  "homepage": "https://github.com/mhsattarian/mapbox-gl-draw-passing-mode#readme"
+}
