@@ -35,7 +35,7 @@ export default (originalMode) => {
       if (typeof state.callBack === "function")
         state.callBack(state.point.toGeoJSON());
       else
-        this.map.fire("draw.stall.create", {
+        this.map.fire("draw.passing-create", {
           features: [state.point.toGeoJSON()],
         });
 
@@ -69,7 +69,7 @@ export default (originalMode) => {
       if (f.isValid()) {
         if (typeof state.callBack === "function") state.callBack(f.toGeoJSON());
         else
-          this.map.fire("draw.stall.create", {
+          this.map.fire("draw.passing-create", {
             features: [f.toGeoJSON()],
           });
       }
