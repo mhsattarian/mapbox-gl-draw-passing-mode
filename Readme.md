@@ -26,12 +26,8 @@ const draw = new MapboxDraw({
   modes: {
     ...MapboxDraw.modes,
     passing_mode_point: mapboxGlDrawPassingMode(MapboxDraw.modes.draw_point),
-    // Passing Callback to handle drawn feature
     passing_mode_line_string: mapboxGlDrawPassingMode(
-      MapboxDraw.modes.draw_line_string,
-      (feature) => {
-        console.log(feature);
-      }
+      MapboxDraw.modes.draw_line_string
     ),
     passing_mode_polygon: mapboxGlDrawPassingMode(
       MapboxDraw.modes.draw_polygon
@@ -40,6 +36,10 @@ const draw = new MapboxDraw({
 });
 
 draw.changeMode("passing_mode_line_string");
+// or passing Callback to handle drawn feature
+draw.changeMode("passing_mode_line_string", (feature) => {
+  console.log(feature);
+});
 ```
 
 when activated, these modes act like Mapbox Gl Draw default modes (`draw_point`, `draw_line_string`, and `draw_polygon`), only they don't add the feature to the map, therefore no `draw.create` event is fired.
