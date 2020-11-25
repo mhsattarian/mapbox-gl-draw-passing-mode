@@ -17,10 +17,17 @@ See a full example in the docs folder, or check at the [**Demo**](https://mhsatt
 npm i mapbox-gl-draw-passing-mode
 ```
 
+or use CDN:
+
+```html
+<script src='https://unpkg.com/mapbox-gl-draw-passing-mode'></script>
+```
+
 ## Usage
 
 ```js
 import mapboxGlDrawPassingMode from "mapbox-gl-draw-passing-mode.js";
+// or global variable mapboxGlDrawPassingMode when using script tag
 
 const draw = new MapboxDraw({
   modes: {
@@ -35,8 +42,9 @@ const draw = new MapboxDraw({
   },
 });
 
+// this will fire `draw.passing-create` event on feature draw
 draw.changeMode("passing_mode_line_string");
-// or passing Callback to handle drawn feature
+// or pass a callback to handle drawn feature
 draw.changeMode("passing_mode_line_string", (feature) => {
   console.log(feature);
 });
