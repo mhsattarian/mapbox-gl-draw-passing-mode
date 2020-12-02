@@ -20,13 +20,13 @@ npm i mapbox-gl-draw-passing-mode
 or use CDN:
 
 ```html
-<script src='https://unpkg.com/mapbox-gl-draw-passing-mode'></script>
+<script src="https://unpkg.com/mapbox-gl-draw-passing-mode"></script>
 ```
 
 ## Usage
 
 ```js
-import mapboxGlDrawPassingMode from "mapbox-gl-draw-passing-mode.js";
+import mapboxGlDrawPassingMode from "mapbox-gl-draw-passing-mode";
 // or global variable mapboxGlDrawPassingMode when using script tag
 
 const draw = new MapboxDraw({
