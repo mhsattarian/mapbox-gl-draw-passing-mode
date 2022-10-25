@@ -1,6 +1,6 @@
 # Mapbox-GL Draw Passing Mode
 
-![npm](https://img.shields.io/npm/v/mapbox-gl-draw-passing-mode?color=green)
+[![npm](https://img.shields.io/npm/v/mapbox-gl-draw-passing-mode?color=green)](https://www.npmjs.com/package/mapbox-gl-draw-passing-mode)
 
 Custom mode for [Mapbox GL Draw](https://github.com/mapbox/mapbox-gl-draw) that adds passing drawing (the ability to draw features but doesn't add them).
 this can be used whenever there's a need to draw features to manipulate others, e.g., when [cutting](https://github.com/ReyhaneMasumi/mapbox-gl-draw-cut-polygon-mode) or [splitting](https://github.com/ReyhaneMasumi/mapbox-gl-draw-split-polygon-mode) features.
