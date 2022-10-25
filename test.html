@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
-  <link>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mapbox Gl Draw Passing Mode (Demo)</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="docs/style.css" />
   </head>
   <body>
     <div id="root"></div>
@@ -12,7 +12,7 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script src="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js"></script>
     <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.0.9/mapbox-gl-draw.js"></script>
-    <script src="https://unpkg.com/mapbox-gl-draw-passing-mode"></script>
+    <script type="module" src="dist/mapbox-gl-draw-passing-mode.js"></script>
 
     <script type="module">
       import nprogress from "https://cdn.skypack.dev/nprogress";
@@ -27,6 +27,11 @@
         useEffect,
       } from "https://cdn.skypack.dev/react";
       import ReactDOM from "https://cdn.skypack.dev/react-dom";
+
+      console.log(
+        "🚀 ~ file: test.html ~ line 54 ~ mapboxGlDrawPassingMode",
+        mapboxGlDrawPassingMode
+      );
 
       class extendDrawBar {
         constructor(opt) {
@@ -107,21 +112,18 @@
           const draw = new MapboxDraw({
             modes: {
               ...MapboxDraw.modes,
-              passing_mode_point: mapboxGlDrawPassingMode(
-                MapboxDraw.modes.draw_point
-              ),
-              passing_mode_line_string: mapboxGlDrawPassingMode(
-                MapboxDraw.modes.draw_line_string,
-                (feature) => {
-                  console.log(feature);
-                  alert("Drawn feature logged, check the console.");
-                }
-              ),
-              passing_mode_polygon: mapboxGlDrawPassingMode(
-                MapboxDraw.modes.draw_polygon
-              ),
+              passing_draw_point: mapboxGlDrawPassingMode.passing_draw_point,
+              passing_draw_line_string:
+                mapboxGlDrawPassingMode.passing_draw_line_string,
+              passing_draw_polygon:
+                mapboxGlDrawPassingMode.passing_draw_polygon,
             },
           });
+
+          console.log(
+            "🚀 ~ file: test.html ~ line 122 ~ useEffect ~ draw",
+            draw
+          );
 
           map.on("draw.passing-create", (info) => {
             console.info("draw.passing-create", info);
@@ -135,35 +137,61 @@
               draw: draw,
               buttons: [
                 {
+                  title: "Passing-Point tool",
                   on: "click",
                   action: () => {
-                    draw.changeMode("passing_mode_point");
+                    draw.changeMode("passing_draw_point");
                   },
                   classes: ["passing_mode", "point"],
-                  title: "Passing-Point tool",
                 },
                 {
+                  title: "Passing-LineString tool",
                   on: "click",
                   action: () => {
-                    draw.changeMode("passing_mode_line_string", (info) => {
+                    const featureCollection = draw.getSelected();
+                    const featureID = featureCollection.features[0].id;
+                    draw.changeMode("passing_draw_line_string", (info) => {
                       console.log(info);
                     });
                   },
                   classes: ["passing_mode", "line"],
-                  title: "Passing-LineString tool",
                 },
                 {
+                  title: "Passing-Polygon tool",
                   on: "click",
                   action: () => {
-                    draw.changeMode("passing_mode_polygon");
+                    draw.changeMode("passing_draw_polygon");
                   },
                   classes: ["passing_mode", "polygon"],
-                  title: "Passing-Polygon tool",
                 },
               ],
             });
 
             map.addControl(drawBar, "top-right");
+
+            // draw.set({
+            //   type: "FeatureCollection",
+            //   features: [
+            //     {
+            //       type: "Feature",
+            //       properties: {},
+            //       id: "example-id",
+            //       geometry: {
+            //         type: "Polygon",
+            //         coordinates: [
+            //           [
+            //             [51.41742415918904, 35.73019558439101],
+            //             [51.31319413385742, 35.702773908694724],
+            //             [51.378997493472525, 35.665562843119986],
+            //             [51.45008537540798, 35.67776544979942],
+            //             [51.46619566741822, 35.70822028156377],
+            //             [51.41742415918904, 35.73019558439101],
+            //           ],
+            //         ],
+            //       },
+            //     },
+            //   ],
+            // });
           });
         }, []);
 

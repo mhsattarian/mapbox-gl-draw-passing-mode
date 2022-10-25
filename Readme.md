@@ -2,7 +2,7 @@
 
 ![npm](https://img.shields.io/npm/v/mapbox-gl-draw-passing-mode?color=green)
 
-Custom mode for [Mapbox GL Draw](https://github.com/mapbox/mapbox-gl-draw) that adds passing drawing, the ability to draw features but doesn't add them.
+Custom mode for [Mapbox GL Draw](https://github.com/mapbox/mapbox-gl-draw) that adds passing drawing (the ability to draw features but doesn't add them).
 this can be used whenever there's a need to draw features to manipulate others, e.g., when [cutting](https://github.com/ReyhaneMasumi/mapbox-gl-draw-cut-polygon-mode) or [splitting](https://github.com/ReyhaneMasumi/mapbox-gl-draw-split-polygon-mode) features.
 
 ## Demo
@@ -25,6 +25,8 @@ or use CDN:
 
 ## Usage
 
+Import passing modes and add them to `mapbox-gl-draw`:
+
 ```js
 import mapboxGlDrawPassingMode from "mapbox-gl-draw-passing-mode";
 // or global variable mapboxGlDrawPassingMode when using script tag
@@ -32,27 +34,26 @@ import mapboxGlDrawPassingMode from "mapbox-gl-draw-passing-mode";
 const draw = new MapboxDraw({
   modes: {
     ...MapboxDraw.modes,
-    passing_mode_point: mapboxGlDrawPassingMode(MapboxDraw.modes.draw_point),
-    passing_mode_line_string: mapboxGlDrawPassingMode(
-      MapboxDraw.modes.draw_line_string
-    ),
-    passing_mode_polygon: mapboxGlDrawPassingMode(
-      MapboxDraw.modes.draw_polygon
-    ),
+    passing_draw_point: mapboxGlDrawPassingMode.passing_draw_point,
+    passing_draw_line_string: mapboxGlDrawPassingMode.passing_draw_line_string,
+    passing_draw_polygon: mapboxGlDrawPassingMode.passing_draw_polygon,
   },
 });
+```
 
+Then change mode to one of the passing mode. to handle drawn features, instead of using `draw.create` event, you can pass a **callback** or use the **`draw.passing-create` event** (fired after feature is drawn and only if **callback** is not provided).
+
+```js
 // this will fire `draw.passing-create` event on feature draw
 draw.changeMode("passing_mode_line_string");
-// or pass a callback to handle drawn feature
+
+// or pass a callback to handle drawn feature (no event would emit)
 draw.changeMode("passing_mode_line_string", (feature) => {
   console.log(feature);
 });
 ```
 
-when activated, these modes act like Mapbox Gl Draw default modes (`draw_point`, `draw_line_string`, and `draw_polygon`), only they don't add the feature to the map, therefore no `draw.create` event is fired.
-
-To handle drawn features, instead of using `draw.create` event, you can pass a **callback** or use the **`draw.passing-create` event** (fired after feature is drawn and only if **callback** is not provided).
+> when activated, these modes act like Mapbox Gl Draw default modes (`draw_point`, `draw_line_string`, and `draw_polygon`), only they don't add the feature to the map, therefore no `draw.create` event is fired.
 
 ## Acknowledgement
 
