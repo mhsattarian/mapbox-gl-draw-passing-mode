@@ -1,6 +1,6 @@
 {
   "name": "mapbox-gl-draw-passing-mode",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "passing drawing mode for mapbox-gl-draw",
   "main": "dist/mapbox-gl-draw-passing-mode.js",
   "module": "index.js",
