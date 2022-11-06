@@ -28,7 +28,7 @@ or use CDN:
 Import passing modes and add them to `mapbox-gl-draw`:
 
 ```js
-import mapboxGlDrawPassingMode from "mapbox-gl-draw-passing-mode";
+import * as mapboxGlDrawPassingMode from "mapbox-gl-draw-passing-mode";
 // or global variable mapboxGlDrawPassingMode when using script tag
 
 const draw = new MapboxDraw({
