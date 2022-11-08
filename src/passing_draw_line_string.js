@@ -26,7 +26,7 @@ passing_draw_line_string.onMouseMove = function (state, e) {
 };
 
 passing_draw_line_string.onStop = function (state) {
-  const f = state.line || state.polygon;
+  const f = state.line;
 
   this.updateUIClasses({ mouse: Constants.cursors.NONE });
   doubleClickZoom.enable(this);

@@ -140,7 +140,9 @@
                   title: "Passing-Point tool",
                   on: "click",
                   action: () => {
-                    draw.changeMode("passing_draw_point");
+                    draw.changeMode("passing_draw_point", (info) => {
+                      console.log(info);
+                    });
                   },
                   classes: ["passing_mode", "point"],
                 },
@@ -148,8 +150,6 @@
                   title: "Passing-LineString tool",
                   on: "click",
                   action: () => {
-                    const featureCollection = draw.getSelected();
-                    const featureID = featureCollection.features[0].id;
                     draw.changeMode("passing_draw_line_string", (info) => {
                       console.log(info);
                     });
@@ -160,7 +160,9 @@
                   title: "Passing-Polygon tool",
                   on: "click",
                   action: () => {
-                    draw.changeMode("passing_draw_polygon");
+                    draw.changeMode("passing_draw_polygon", (info) => {
+                      console.log(info);
+                    });
                   },
                   classes: ["passing_mode", "polygon"],
                 },
