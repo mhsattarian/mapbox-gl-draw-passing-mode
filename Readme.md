@@ -55,6 +55,10 @@ draw.changeMode("passing_mode_line_string", (feature) => {
 
 > when activated, these modes act like Mapbox Gl Draw default modes (`draw_point`, `draw_line_string`, and `draw_polygon`), only they don't add the feature to the map, therefore no `draw.create` event is fired.
 
+## Development
+
+Use `npm run dev` command to start the local server on port `3000` then navigate to `/test.html`.
+
 ## Acknowledgement
 
 The inspiration is from the [Radius Mode](https://gist.github.com/chriswhong/694779bc1f1e5d926e47bab7205fa559) created by @chriswhong and the discussion [here](https://github.com/mapbox/mapbox-gl-draw/issues/767#issuecomment-384833953).

@@ -141,6 +141,7 @@
                   on: "click",
                   action: () => {
                     draw.changeMode("passing_draw_point", (info) => {
+                      alert(JSON.stringify(info, undefined, 4));
                       console.log(info);
                     });
                   },
@@ -151,6 +152,7 @@
                   on: "click",
                   action: () => {
                     draw.changeMode("passing_draw_line_string", (info) => {
+                      alert(JSON.stringify(info, undefined, 4));
                       console.log(info);
                     });
                   },
@@ -161,6 +163,7 @@
                   on: "click",
                   action: () => {
                     draw.changeMode("passing_draw_polygon", (info) => {
+                      alert(JSON.stringify(info, undefined, 4));
                       console.log(info);
                     });
                   },

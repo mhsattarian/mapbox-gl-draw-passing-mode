@@ -8,7 +8,7 @@
     "watch": "rollup -cw",
     "build": "rollup -c",
     "serve": "npx serve",
-    "dev": "npm-run-all --parallel watch serve"
+    "dev": "npm-run-all --parallel serve watch"
   },
   "devDependencies": {
     "@mapbox/mapbox-gl-draw": "^1.2.0",
