@@ -36,21 +36,13 @@ passing_draw_line_string.onStop = function (state) {
 
   /// check to see if we've deleted this feature
   const drawnFeature = this.getFeature(f.id);
-
-  try {
-    if (drawnFeature === undefined) {
-      /// Call `onCancel` if exists.
-      if (typeof state.onCancel === "function") state.onCancel();
-      return;
-    }
-    /// remove last added coordinate
-    else f.removeCoordinate(`${state.currentVertexPosition}`);
-  } catch (err) {
-    console.error(
-      "🚀 ~ file: passing_draw_line_string.js ~ line 58 ~ err",
-      err
-    );
+  if (drawnFeature === undefined) {
+    /// Call `onCancel` if exists.
+    if (typeof state.onCancel === "function") state.onCancel();
+    return;
   }
+  /// remove last added coordinate
+  else f.removeCoordinate(`${state.currentVertexPosition}`);
 
   if (f.isValid()) {
     if (typeof state.onDraw === "function") state.onDraw(f.toGeoJSON());
@@ -58,10 +50,9 @@ passing_draw_line_string.onStop = function (state) {
       this.map.fire("draw.passing-create", {
         features: [f.toGeoJSON()],
       });
-  } else {
-    this.deleteFeature([f.id], { silent: true });
-    this.changeMode(Constants.modes.SIMPLE_SELECT, {}, { silent: true });
   }
+  this.deleteFeature([f.id], { silent: true });
+  this.changeMode(Constants.modes.SIMPLE_SELECT, {}, { silent: true });
 };
 
 export default passing_draw_line_string;

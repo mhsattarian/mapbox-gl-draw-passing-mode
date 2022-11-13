@@ -1,6 +1,6 @@
 import draw_polygon from "@mapbox/mapbox-gl-draw/src/modes/draw_polygon";
-import * as Constants from "@mapbox/mapbox-gl-draw/src/constants";
 import doubleClickZoom from "@mapbox/mapbox-gl-draw/src/lib/double_click_zoom";
+import * as Constants from "@mapbox/mapbox-gl-draw/src/constants";
 
 const {
   onSetup: originOnSetup,
@@ -14,9 +14,11 @@ const passing_draw_polygon = {
   ...restOriginMethods,
 };
 
-passing_draw_polygon.onSetup = function (callBack) {
+passing_draw_polygon.onSetup = function (opt) {
   const state = this.originOnSetup();
-  state.callBack = callBack;
+  const { onDraw, onCancel } = opt;
+  state.onDraw = onDraw;
+  state.onCancel = onCancel;
   return state;
 };
 
@@ -26,26 +28,31 @@ passing_draw_polygon.onMouseMove = function (state, e) {
 };
 
 passing_draw_polygon.onStop = function (state) {
-  const f = state.line || state.polygon;
+  const f = state.polygon;
 
   this.updateUIClasses({ mouse: Constants.cursors.NONE });
   doubleClickZoom.enable(this);
   this.activateUIButton();
-  // check to see if we've deleted this feature
-  if (this.getFeature(f.id) === undefined) return;
-  //remove last added coordinate
-  f.removeCoordinate(`${state.currentVertexPosition}`);
+
+  /// check to see if we've deleted this feature
+  const drawnFeature = this.getFeature(f.id);
+  if (drawnFeature === undefined) {
+    /// Call `onCancel` if exists.
+    if (typeof state.onCancel === "function") state.onCancel();
+    return;
+  }
+  /// remove last added coordinate
+  else f.removeCoordinate(`${state.currentVertexPosition}`);
+
   if (f.isValid()) {
-    if (typeof state.callBack === "function") state.callBack(f.toGeoJSON());
+    if (typeof state.onDraw === "function") state.onDraw(f.toGeoJSON());
     else
       this.map.fire("draw.passing-create", {
         features: [f.toGeoJSON()],
       });
   }
-  // else {
   this.deleteFeature([f.id], { silent: true });
   this.changeMode(Constants.modes.SIMPLE_SELECT, {}, { silent: true });
-  // }
 };
 
 export default passing_draw_polygon;

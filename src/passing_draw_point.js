@@ -13,9 +13,11 @@ const passing_draw_point = {
   ...restOriginMethods,
 };
 
-passing_draw_point.onSetup = function (callBack) {
+passing_draw_point.onSetup = function (opt) {
   const state = this.originOnSetup();
-  state.callBack = callBack;
+  const { onDraw, onCancel } = opt;
+  state.onDraw = onDraw;
+  state.onCancel = onCancel;
   return state;
 };
 
@@ -23,8 +25,7 @@ passing_draw_point.onTap = passing_draw_point.onClick = function (state, e) {
   this.updateUIClasses({ mouse: Constants.cursors.MOVE });
   state.point.updateCoordinate("", e.lngLat.lng, e.lngLat.lat);
 
-  if (typeof state.callBack === "function")
-    state.callBack(state.point.toGeoJSON());
+  if (typeof state.onDraw === "function") state.onDraw(state.point.toGeoJSON());
   else
     this.map.fire("draw.passing-create", {
       features: [state.point.toGeoJSON()],
@@ -39,6 +40,16 @@ passing_draw_point.onMouseMove = function (state, e) {
 };
 
 passing_draw_point.onStop = function (state) {
+  const f = state.point;
+
+  /// check to see if we've deleted this feature
+  const drawnFeature = this.getFeature(f.id);
+  if (drawnFeature === undefined) {
+    /// Call `onCancel` if exists.
+    if (typeof state.onCancel === "function") state.onCancel();
+    return;
+  }
+
   this.activateUIButton();
   this.deleteFeature([state.point.id], { silent: true });
 };
