@@ -48,8 +48,13 @@ Then change mode to one of the passing mode. to handle drawn features, instead o
 draw.changeMode("passing_mode_line_string");
 
 // or pass a callback to handle drawn feature (no event would emit)
-draw.changeMode("passing_mode_line_string", (feature) => {
-  console.log(feature);
+draw.changeMode("passing_mode_line_string", {
+  onDraw: (feature) => {
+    console.log(feature);
+  },
+  onCancel: () => {
+    /// ...
+  },
 });
 ```
 
