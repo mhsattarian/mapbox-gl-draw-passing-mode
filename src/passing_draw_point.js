@@ -1,5 +1,4 @@
 import * as MapboxDraw from "@mapbox/mapbox-gl-draw";
-console.log("🚀 ~ file: passing_draw_point.js:2 ~ MapboxDraw*:", MapboxDraw);
 
 const { draw_point } = MapboxDraw.modes;
 const Constants = MapboxDraw.constants;
