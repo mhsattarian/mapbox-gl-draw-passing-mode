@@ -1,5 +1,6 @@
 import { nodeResolve } from "@rollup/plugin-node-resolve";
-import { terser } from "rollup-plugin-terser";
+import terser from "@rollup/plugin-terser";
+import commonjs from "@rollup/plugin-commonjs";
 
 export default {
   input: "./src/index.js",
@@ -8,5 +9,5 @@ export default {
     format: "umd",
     name: "mapboxGlDrawPassingMode",
   },
-  plugins: [nodeResolve(), terser()],
+  plugins: [nodeResolve(), terser(), commonjs()],
 };

@@ -1,6 +1,12 @@
-import draw_polygon from "@mapbox/mapbox-gl-draw/src/modes/draw_polygon";
-import doubleClickZoom from "@mapbox/mapbox-gl-draw/src/lib/double_click_zoom";
-import * as Constants from "@mapbox/mapbox-gl-draw/src/constants";
+import MapboxDraw from "@mapbox/mapbox-gl-draw";
+
+const { draw_polygon } = MapboxDraw.modes;
+const { doubleClickZoom } = MapboxDraw.lib;
+console.log(
+  "🚀 ~ file: passing_draw_polygon.js:5 ~ doubleClickZoom:",
+  doubleClickZoom
+);
+const Constants = MapboxDraw.constants;
 
 const {
   onSetup: originOnSetup,

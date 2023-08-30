@@ -1,6 +1,17 @@
-import draw_line_string from "@mapbox/mapbox-gl-draw/src/modes/draw_line_string";
-import doubleClickZoom from "@mapbox/mapbox-gl-draw/src/lib/double_click_zoom";
-import * as Constants from "@mapbox/mapbox-gl-draw/src/constants";
+import * as MapboxDraw from "@mapbox/mapbox-gl-draw";
+
+console.log(
+  "🚀 ~ file: passing_draw_line_string.js:2 ~ MapboxDraw*:",
+  MapboxDraw
+);
+
+const { draw_line_string } = MapboxDraw.modes;
+const { doubleClickZoom } = MapboxDraw.lib;
+console.log(
+  "🚀 ~ file: passing_draw_line_string.js:5 ~ doubleClickZoom:",
+  doubleClickZoom
+);
+const Constants = MapboxDraw.constants;
 
 const {
   onSetup: originOnSetup,
