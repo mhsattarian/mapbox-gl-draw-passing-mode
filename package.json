@@ -1,6 +1,6 @@
 {
   "name": "mapbox-gl-draw-passing-mode",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "description": "passing drawing mode for mapbox-gl-draw",
   "main": "dist/mapbox-gl-draw-passing-mode.js",
   "module": "src/index.js",
@@ -11,7 +11,7 @@
     "dev": "npm-run-all --parallel serve watch"
   },
   "devDependencies": {
-    "@mapbox/mapbox-gl-draw": "^1.4.2",
+    "@mapbox/mapbox-gl-draw": "^1.4.3",
     "@rollup/plugin-commonjs": "^25.0.4",
     "@rollup/plugin-node-resolve": "^15.2.1",
     "@rollup/plugin-terser": "^0.4.3",
@@ -20,7 +20,7 @@
     "serve": "^14.0.1"
   },
   "peerDependencies": {
-    "@mapbox/mapbox-gl-draw": "1.4.2"
+    "@mapbox/mapbox-gl-draw": "1.4.3"
   },
   "repository": {
     "type": "git",
